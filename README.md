@@ -2,7 +2,7 @@
 
 This config is based on the config from @ThePrimeagen
 
-![screenshot](image.png)
+![screenshot/image.png](image.png)
 
 ## Requirements
 - ripgrep
