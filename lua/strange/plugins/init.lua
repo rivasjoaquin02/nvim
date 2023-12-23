@@ -7,11 +7,5 @@ return {
     },
     "mbbill/undotree",
     "tpope/vim-fugitive",
-    {
-        "p00f/cphelper.nvim",
-        dependencies = {
-            "nvim-lua/plenary.nvim"
-        }
-    },
     "github/copilot.vim"
 }
