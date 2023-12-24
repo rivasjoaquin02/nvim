@@ -18,7 +18,7 @@ typedef pair<int, int> ii;
 typedef vector<int> vi;
 typedef vector<ii> vii;
 typedef vector<vi> vvi;
-const ll MOD = 1e9 + 7;
+constexpr long MOD = 1e9 + 7;
 
 int main() {
   fastio;

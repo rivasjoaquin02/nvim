@@ -1,6 +1,12 @@
 local silent = { silent = true }
 
 require("lualine").setup({
+    options = {
+        icons_enabled = true,
+        theme = "gruvbox",
+        component_separators = "|",
+        section_separators = "",
+    },
     sections = {
         lualine_x = {
             {
@@ -49,32 +55,17 @@ require("ccc").setup({
     },
 })
 require("symbols-outline").setup({
-    -- auto_preview = true, -- bad rn
     auto_close = true,
 })
 
 require("refactoring").setup()
-vim.keymap.set("n", "<leader>rr", require("refactoring").select_refactor)
-
---vim.g["mkdp_markdown_css"] = vim.fn.expand("~/.config/nvim/md.css")
---vim.g["mkdp_theme"] = "light"
 
 -- keymaps
-
---nnoremap("<leader>dd", function() require("duck").hatch("ඞ", 10) end)
---nnoremap("<leader>dd", function() require("duck").hatch("🦀", 10) end)
---nnoremap("<leader>dk", function() require("duck").cook() end)
-
+vim.keymap.set("n", "<leader>rr", require("refactoring").select_refactor)
 vim.keymap.set("n", "<leader>u", "<Cmd>UndotreeToggle<CR>", silent)
 vim.keymap.set("n", "<leader>gg", "<Cmd>LazyGit<CR>", silent)
 vim.keymap.set("n", "<leader>co", "<Cmd>CccPick<CR>", silent)
 vim.keymap.set("n", "<leader>cc", "<Cmd>CccHighlighterToggle<CR>", silent)
 vim.keymap.set("n", "<leader>cv", "<Cmd>CccConvert<CR>", silent)
-vim.keymap.set("n", "<leader>s", "<Cmd>SymbolsOutline<CR>", silent)
-vim.keymap.set("n", "<leader>oo", "<Cmd>TodoClose<CR>", silent)
-vim.keymap.set("n", "<leader>ol", "<Cmd>TodoOpenFileList<CR>", silent)
+--vim.keymap.set("n", "<leader>s", "<Cmd>SymbolsOutline<CR>", silent)
 vim.keymap.set("n", "<leader>db", "<Cmd>DBUIToggle<CR>", silent)
-
-for i = 1, 10 do
-    vim.keymap.set("n", "<leader>o" .. i % 10, "<Cmd>TodoOpenIndex " .. i .. "<CR>", silent)
-end

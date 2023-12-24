@@ -23,16 +23,14 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- yank to the + register with is also the system clipboard
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 -- switch projects with tmux
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 -- 😎: format the code
-vim.keymap.set("n", "<leader>f", function()
-    vim.lsp.buf.format()
-end)
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
 -- vertical - horizontal view
 vim.keymap.set("n", "<leader>nv", ":Vex <CR>")
@@ -44,7 +42,7 @@ vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
--- global replace the word 
+-- global replace the word
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- this make your current file executable
