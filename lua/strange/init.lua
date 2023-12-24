@@ -1,5 +1,4 @@
-vim.g.mapleader = " "
-
 require("strange.lazy")
-require("strange.remap")
+require("strange.remaps")
+require("strange.options")
 require("strange.set")
