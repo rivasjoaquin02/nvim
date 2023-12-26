@@ -182,28 +182,9 @@ vim.diagnostic.config({
     virtual_text = true
 })
 
-local null_ls = require("null-ls")
-local null_opts = lsp.build_options("null-ls", {})
-
-local txt_formatter = {
-    method = null_ls.methods.FORMATTING,
-    filetypes = { "txt", "text" },
-    generator = null_ls.formatter({
-        command = "txt-format",
-        args = { "$FILENAME" },
-        to_stdin = true,
-        from_stderr = true,
-    }),
-}
-
-null_ls.setup({
-    on_attach = function(client, bufnr) null_opts.on_attach(client, bufnr) end,
-    sources = { txt_formatter },
-})
 
 require("mason-null-ls").setup({
     ensure_installed = nil,
     automatic_installation = false,
     handlers = {},
 })
-
