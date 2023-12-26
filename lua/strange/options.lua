@@ -36,11 +36,9 @@ local options = {
     colorcolumn = "80",
     updatetime = 20,
     scrolloff = 15,
-    mouse = "",
     guicursor = "a:block",
 
     title = true,
-    -- titlestring = "%t - Wvim",
     titlestring = "Neovim - %t",
     --guifont = "MesloLGS NF:h18",
     -- clipboard = "unnamedplus",
