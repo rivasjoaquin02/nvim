@@ -1,6 +1,3 @@
--- this must be called BEFORE lazy
-vim.g.mapleader = " "
-
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>u", ":UndotreeShow<CR>")
 
@@ -60,6 +57,7 @@ vim.keymap.set("n", "<leader>dr", "<cmd> DapContinue <CR>")
 vim.keymap.set("n", "<leader>tv", ":Vex | term <CR>")
 vim.keymap.set("n", "<leader>th", ":Sex | term <CR>")
 vim.keymap.set("n", "<leader>tt", ":tabnew | term <CR>")
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
 -- competitest
 vim.keymap.set("n", "<leader>tr", ":CompetiTest run <CR>")
