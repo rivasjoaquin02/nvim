@@ -49,6 +49,9 @@ vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
 
+-- neo-tree
+vim.keymap.set("n", "<leader><tab>", ":Neotree float <CR>")
+
 -- debugging
 vim.keymap.set("n", "<leader>db", "<cmd> DapToggleBreakpoint <CR>")
 vim.keymap.set("n", "<leader>dr", "<cmd> DapContinue <CR>")
@@ -58,9 +61,3 @@ vim.keymap.set("n", "<leader>tv", ":Vex | term <CR>")
 vim.keymap.set("n", "<leader>th", ":Sex | term <CR>")
 vim.keymap.set("n", "<leader>tt", ":tabnew | term <CR>")
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
-
--- competitest
-vim.keymap.set("n", "<leader>tr", ":CompetiTest run <CR>")
-vim.keymap.set("n", "<leader>tn", ":CompetiTest add_testcase <CR>")
-vim.keymap.set("n", "<leader>td", ":CompetiTest delete_testcase <CR>")
-vim.keymap.set("n", "<leader>te", ":CompetiTest edit_testcase <CR>")
