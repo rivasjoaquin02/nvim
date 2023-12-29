@@ -1,6 +1,3 @@
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
-vim.keymap.set("n", "<leader>u", ":UndotreeShow<CR>")
-
 -- this is for move a selected line up and down (like alt in vscode)
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -23,15 +20,8 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
--- switch projects with tmux
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-
 -- 😎: format the code
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
-
--- vertical - horizontal view
-vim.keymap.set("n", "<leader>nv", ":Vex <CR>")
-vim.keymap.set("n", "<leader>nh", ":Sex <CR>")
 
 -- quickfix navigation
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
@@ -48,13 +38,6 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
-
--- neo-tree
-vim.keymap.set("n", "<leader><tab>", ":Neotree float <CR>")
-
--- debugging
-vim.keymap.set("n", "<leader>db", "<cmd> DapToggleBreakpoint <CR>")
-vim.keymap.set("n", "<leader>dr", "<cmd> DapContinue <CR>")
 
 -- terminal window
 vim.keymap.set("n", "<leader>tv", ":Vex | term <CR>")

@@ -1,22 +1,27 @@
 return {
-    { "github/copilot.vim",                         event = "VeryLazy" },
+    { "github/copilot.vim",   event = "VeryLazy" },
+
     -- nice to have
-    { "numToStr/Comment.nvim" },
-    { "windwp/nvim-autopairs" },
-    { "windwp/nvim-ts-autotag" },
+    {
+        "windwp/nvim-autopairs",
+        event = "VeryLazy",
+        config = function()
+            require("nvim-autopairs").setup()
+        end
+    },
+    {
+        "windwp/nvim-ts-autotag",
+        event = "VeryLazy",
+        config = function()
+            require("nvim-ts-autotag").setup()
+        end
+    },
     { "JoosepAlviste/nvim-ts-context-commentstring" },
-    { "ThePrimeagen/refactoring.nvim" },
-
-    -- navigation
-    { "simrat39/symbols-outline.nvim" },
-
-    -- git
-    { "lewis6991/gitsigns.nvim" },
-
 
     -- misc
     { "kevinhwang91/nvim-bqf",                      ft = "qf" },
-    { "mbbill/undotree" },
+
+    -- db ui
     {
         "kristijanhusak/vim-dadbod-ui",
         event = "VeryLazy",
@@ -29,6 +34,9 @@ return {
             "DBUIToggle",
             "DBUIAddConnection",
             "DBUIFindBuffer",
+        },
+        keys = {
+            { "<leader>db", "<Cmd>DBUIToggle<CR>", desc = "[D]e[B]ug" }
         },
         init = function()
             vim.g.db_ui_use_nerd_fonts = 1

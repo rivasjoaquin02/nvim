@@ -4,6 +4,7 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter-context" },
     config = function()
         require("nvim-treesitter.configs").setup({
+            autoinstall = true,
             highlight = {
                 enable = true,
                 additional_vim_regex_highlighting = { "latex", "markdown" },
