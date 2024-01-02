@@ -1,20 +1,16 @@
 return {
-    { "github/copilot.vim",   event = "VeryLazy" },
+    { "github/copilot.vim",                         event = "VeryLazy" },
 
     -- nice to have
     {
         "windwp/nvim-autopairs",
-        event = "VeryLazy",
-        config = function()
-            require("nvim-autopairs").setup()
-        end
+        event = "InsertEnter",
+        opts = {},
     },
     {
         "windwp/nvim-ts-autotag",
-        event = "VeryLazy",
-        config = function()
-            require("nvim-ts-autotag").setup()
-        end
+        event = "InsertEnter",
+        opts = {},
     },
     { "JoosepAlviste/nvim-ts-context-commentstring" },
 
@@ -36,7 +32,7 @@ return {
             "DBUIFindBuffer",
         },
         keys = {
-            { "<leader>db", "<Cmd>DBUIToggle<CR>", desc = "[D]e[B]ug" }
+            { "<leader>db", "<Cmd>DBUIToggle<CR>", desc = "[D]e[B]ug" },
         },
         init = function()
             vim.g.db_ui_use_nerd_fonts = 1
