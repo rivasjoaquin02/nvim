@@ -1,3 +1,5 @@
 require("strange.lazy")
-require("strange.remaps")
+require("strange.keymaps")
 require("strange.options")
+require("strange.icons")
+require("strange.autocmds")

@@ -1,33 +1,105 @@
 return {
-	"nvim-treesitter/nvim-treesitter",
-	build = ":TSUpdate",
-	dependencies = { "nvim-treesitter/nvim-treesitter-context" },
-	config = function()
-		require("nvim-treesitter.configs").setup({
-			autoinstall = true,
-			ensure_installed = { "c", "cpp", "python", "javascript", "typescript", "tsx" },
-			autotag = {
-				enable = true,
-			},
-			highlight = {
-				enable = true,
-				additional_vim_regex_highlighting = { "latex", "markdown" },
-				disable = function(lang, buf)
-					local max_filesize = 100 * 1024 -- 100 KB
-					local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-					if ok and stats and stats.size > max_filesize then
-						return true
-					end
-					if lang == "latex" then
-						return true
-					end
-					return false
-				end,
-			},
-			indent = {
-				enable = true,
-				-- disable = { "cpp", "typescript", "typescriptreact", "rust" },
-			},
-		})
-	end,
+    "nvim-treesitter/nvim-treesitter",
+    version = false,
+    build = ":TSUpdate",
+    event = { "BufReadPost", "BufNewFile" },
+    dependencies = {
+        "nvim-treesitter/nvim-treesitter-context",
+        "nvim-treesitter/nvim-treesitter-textobjects",
+    },
+    opts = function(_, opts)
+        if type(opts.ensure_installed) == "table" then
+            vim.list_extend(opts.ensure_installed, { "typescript", "tsx" })
+        end
+    end,
+    config = function()
+        require("nvim-treesitter.configs").setup({
+            autoinstall = true,
+            ensure_installed = {
+                "lua",
+                "markdown",
+                "markdown_inline",
+                "c",
+                "python",
+                "javascript",
+                "typescript",
+                "tsx",
+                "html",
+                "json",
+                "yaml",
+                "vim",
+                "vimdoc",
+            },
+            highlight = {
+                enable = true,
+                additional_vim_regex_highlighting = { "latex", "markdown" },
+            },
+            --context_commentstring = { enable = true, enable_autocmd = false },
+            indent = { enable = true },
+            autotag = {
+                enable = true,
+            },
+            incremental_selection = {
+                enable = true,
+                keymaps = {
+                    init_selection = "<leader>vv",
+                    node_incremental = "+",
+                    scope_incremental = false,
+                    node_decremental = "_",
+                },
+            },
+            textobjects = {
+                select = {
+                    enable = true,
+                    lookahead = true,
+
+                    keymaps = {
+                        -- You can use the capture groups defined in textobjects.scm
+                        ["af"] = { query = "@function.outer", desc = "around a function" },
+                        ["if"] = { query = "@function.inner", desc = "inner part of a function" },
+                        ["ac"] = { query = "@class.outer", desc = "around a class" },
+                        ["ic"] = { query = "@class.inner", desc = "inner part of a class" },
+                        ["ai"] = { query = "@conditional.outer", desc = "around an if statement" },
+                        ["ii"] = { query = "@conditional.inner", desc = "inner part of an if statement" },
+                        ["al"] = { query = "@loop.outer", desc = "around a loop" },
+                        ["il"] = { query = "@loop.inner", desc = "inner part of a loop" },
+                        ["ap"] = { query = "@parameter.outer", desc = "around parameter" },
+                        ["ip"] = { query = "@parameter.inner", desc = "inside a parameter" },
+                    },
+                    selection_modes = {
+                        ["@parameter.outer"] = "v",   -- charwise
+                        ["@parameter.inner"] = "v",   -- charwise
+                        ["@function.outer"] = "v",    -- charwise
+                        ["@conditional.outer"] = "V", -- linewise
+                        ["@loop.outer"] = "V",        -- linewise
+                        ["@class.outer"] = "<c-v>",   -- blockwise
+                    },
+                    include_surrounding_whitespace = false,
+                },
+                move = {
+                    enable = true,
+                    set_jumps = true, -- whether to set jumps in the jumplist
+                    goto_previous_start = {
+                        ["[f"] = { query = "@function.outer", desc = "Previous function" },
+                        ["[c"] = { query = "@class.outer", desc = "Previous class" },
+                        ["[p"] = { query = "@parameter.inner", desc = "Previous parameter" },
+                    },
+                    goto_next_start = {
+                        ["]f"] = { query = "@function.outer", desc = "Next function" },
+                        ["]c"] = { query = "@class.outer", desc = "Next class" },
+                        ["]p"] = { query = "@parameter.inner", desc = "Next parameter" },
+                    },
+                },
+                swap = {
+                    enable = true,
+                    swap_next = {
+                        ["<leader>a"] = "@parameter.inner",
+                    },
+                    swap_previous = {
+                        ["<leader>A"] = "@parameter.inner",
+                    },
+                },
+            },
+        })
+    end,
 }

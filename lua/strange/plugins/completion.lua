@@ -1,73 +1,55 @@
 return {
-	-- snippets
-	{
-		"L3MON4D3/LuaSnip",
-		dependencies = {
-			"rafamadriz/friendly-snippets", --snippets like vscode
-			"saadparwaiz1/cmp_luasnip",
-		},
-		config = function()
-			require("luasnip.loaders.from_vscode").lazy_load()
-		end,
-	},
-	-- code completitions
-	{
-		"hrsh7th/nvim-cmp",
-		dependencies = { "hrsh7th/cmp-nvim-lsp" },
-		config = function()
-			local cmp = require("cmp")
+    "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
+    dependencies = {
+        { "hrsh7th/cmp-nvim-lsp" },
+        { "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
+    },
+    config = function()
+        local lsp = require("lsp-zero")
+        lsp.extend_cmp()
 
-			cmp.setup({
-				snippet = {
-					expand = function(args)
-						require("luasnip").lsp_expand(args.body)
-					end,
-				},
-				window = {
-					completion = cmp.config.window.bordered(),
-					documentation = cmp.config.window.bordered(),
-				},
-				mapping = cmp.mapping.preset.insert({
-					["<C-b>"] = cmp.mapping.scroll_docs(-4),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<C-e>"] = cmp.mapping.abort(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-				}),
-				sources = cmp.config.sources({
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
-				}, {
-					{ name = "buffer" },
-				}),
-			})
+        local cmp = require("cmp")
+        local cmp_action = lsp.cmp_action()
+        local icons = require("strange.icons")
 
-			-- Set configuration for specific filetype.
-			cmp.setup.filetype("gitcommit", {
-				sources = cmp.config.sources({
-					{ name = "git" }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
-				}, {
-					{ name = "buffer" },
-				}),
-			})
-
-			-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-			cmp.setup.cmdline({ "/", "?" }, {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = {
-					{ name = "buffer" },
-				},
-			})
-
-			-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-			cmp.setup.cmdline(":", {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources({
-					{ name = "path" },
-				}, {
-					{ name = "cmdline" },
-				}),
-			})
-		end,
-	},
+        cmp.setup({
+            formatting = {
+                format = function(entry, item)
+                    item.kind = icons.kind[item.kind] .. " " .. item.kind
+                    --return item
+                    return require("tailwindcss-colorizer-cmp").formatter(entry, item)
+                end,
+                --require("tailwindcss-colorizer-cmp").formatter,
+            },
+            mapping = cmp.mapping.preset.insert({
+                ["<Tab>"] = cmp_action.luasnip_supertab(),
+                ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+                ["<C-d>"] = cmp.mapping.scroll_docs(4),
+                ["<C-Space>"] = cmp.mapping.complete(),
+                ["<C-e>"] = cmp.mapping.abort(),
+                ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+            }),
+            snippet = {
+                expand = function(args)
+                    require("luasnip").lsp_expand(args.body)
+                end,
+            },
+            window = {
+                completion = cmp.config.window.bordered(),
+                documentation = cmp.config.window.bordered(),
+            },
+            sources = cmp.config.sources({
+                { name = "nvim_lsp" },
+                { name = "nvim_lua" },
+                { name = "luasnip" },
+                { name = "buffer" },
+                { name = "path" },
+                { name = "calc" },
+                { name = "emoji" },
+                { name = "treesitter" },
+                { name = "tmux" },
+            }),
+        })
+    end,
 }

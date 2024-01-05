@@ -1,7 +1,11 @@
 return {
     "nvim-telescope/telescope.nvim",
+    cmd = "Telescope",
+    version = false,
+    lazy = true,
     dependencies = {
         { "nvim-lua/plenary.nvim" },
+        { "jvgrootveld/telescope-zoxide" },
         { "nvim-telescope/telescope-ui-select.nvim" },
         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
         { "nvim-telescope/telescope-dap.nvim" },
@@ -13,13 +17,13 @@ return {
         {
             "<leader>ps",
             function()
-                require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > ") });
+                require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > ") })
             end,
-            desc = "Grep Search"
-        }
+            desc = "Grep Search",
+        },
     },
     config = function()
-        require("telescope").setup {
+        require("telescope").setup({
             defaults = {
                 layout_config = {
                     width = 0.85,
@@ -74,13 +78,15 @@ return {
                     case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
                 },
                 ["ui-select"] = {
-                    require("telescope.themes").get_dropdown {}
-                }
+                    require("telescope.themes").get_dropdown({}),
+                },
             },
-        }
+        })
 
         require("telescope").load_extension("fzf")
         require("telescope").load_extension("ui-select")
         require("telescope").load_extension("refactoring")
-    end
+        require("telescope").load_extension("dap")
+        require("telescope").load_extension("zoxide")
+    end,
 }

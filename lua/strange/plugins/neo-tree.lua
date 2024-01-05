@@ -1,16 +1,17 @@
 return {
     "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    keys = {
-        { "<leader>pv", ":Neotree current<CR>",     desc = "Neotree File System" },
-        { "<leader>nv", ":Vex Neotree current<CR>", desc = "" },
-        { "<leader>nh", ":Sex Neotree current<CR>", desc = "" }
-    },
+    event = "VeryLazy",
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
         "MunifTanjim/nui.nvim",
         "3rd/image.nvim",              -- Optional image support in preview window: See `# Preview Mode` for more information
+    },
+    keys = {
+        { "<leader>pv",    ":Neotree current<CR>",      desc = "Neotree File System" },
+        { "<leader>nv",    ":Vex Neotree current<CR>",  desc = "" },
+        { "<leader>nh",    ":Sex Neotree current<CR>",  desc = "" },
+        { "<leader><tab>", ":Neotree toggle right<CR>", desc = "" },
     },
     config = function()
         require("neo-tree").setup({
@@ -31,7 +32,7 @@ return {
             --   end , -- this sorts files and directories descendantly
             default_component_configs = {
                 container = {
-                    enable_character_fade = true
+                    enable_character_fade = true,
                 },
                 indent = {
                     indent_size = 2,
@@ -48,13 +49,10 @@ return {
                     expander_highlight = "NeoTreeExpander",
                 },
                 icon = {
-                    folder_closed = "",
-                    folder_open = "",
-                    folder_empty = "󰜌",
-                    -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
-                    -- then these will never be used.
-                    default = "*",
-                    highlight = "NeoTreeFileIcon"
+                    folder_closed = "",
+                    folder_open = "",
+                    folder_empty = "",
+                    folder_empty_open = "",
                 },
                 modified = {
                     symbol = "[+]",
@@ -68,19 +66,18 @@ return {
                 git_status = {
                     symbols = {
                         -- Change type
-                        added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
-                        modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
-                        deleted   = "✖", -- this can only be used in the git_status source
-                        renamed   = "󰁕", -- this can only be used in the git_status source
+                        added = "",
+                        deleted = "",
+                        modified = "",
+                        renamed = "",
                         -- Status type
                         untracked = "",
-                        ignored   = "",
-                        unstaged  = "󰄱",
-                        staged    = "",
-                        conflict  = "",
-                    }
-                },
-                -- If you don't want to use these columns, you can set `enabled = false` for each of them individually
+                        ignored = "",
+                        unstaged = "",
+                        staged = "",
+                        conflict = "",
+                    },
+                }, -- If you don't want to use these columns, you can set `enabled = false` for each of them individually
                 file_size = {
                     enabled = true,
                     required_width = 64, -- min width of window required to show this column
@@ -107,7 +104,7 @@ return {
             commands = {},
             window = {
                 position = "right",
-                width = 40,
+                width = 35,
                 mapping_options = {
                     noremap = true,
                     nowait = true,
@@ -141,8 +138,8 @@ return {
                         -- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
                         -- some commands may take optional config options, see `:h neo-tree-mappings` for details
                         config = {
-                            show_path = "none" -- "none", "relative", "absolute"
-                        }
+                            show_path = "none", -- "none", "relative", "absolute"
+                        },
                     },
                     ["A"] = "add_directory", -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
                     ["d"] = "delete",
@@ -164,7 +161,7 @@ return {
                     ["<"] = "prev_source",
                     [">"] = "next_source",
                     ["i"] = "show_file_details",
-                }
+                },
             },
             nesting_rules = {},
             filesystem = {
@@ -234,7 +231,7 @@ return {
                     },
                 },
 
-                commands = {} -- Add a custom command or override a global one using the same function name
+                commands = {}, -- Add a custom command or override a global one using the same function name
             },
             buffers = {
                 follow_current_file = {
@@ -256,30 +253,30 @@ return {
                         ["on"] = { "order_by_name", nowait = false },
                         ["os"] = { "order_by_size", nowait = false },
                         ["ot"] = { "order_by_type", nowait = false },
-                    }
+                    },
                 },
             },
             git_status = {
                 window = {
                     position = "float",
                     mappings = {
-                        ["A"]  = "git_add_all",
+                        ["A"] = "git_add_all",
                         ["gu"] = "git_unstage_file",
                         ["ga"] = "git_add_file",
                         ["gr"] = "git_revert_file",
                         ["gc"] = "git_commit",
                         ["gp"] = "git_push",
                         ["gg"] = "git_commit_and_push",
-                        ["o"]  = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
+                        ["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
                         ["oc"] = { "order_by_created", nowait = false },
                         ["od"] = { "order_by_diagnostics", nowait = false },
                         ["om"] = { "order_by_modified", nowait = false },
                         ["on"] = { "order_by_name", nowait = false },
                         ["os"] = { "order_by_size", nowait = false },
                         ["ot"] = { "order_by_type", nowait = false },
-                    }
-                }
-            }
+                    },
+                },
+            },
         })
-    end
+    end,
 }
