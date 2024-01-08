@@ -1,19 +1,17 @@
 # strangedevel - nvim
 
-This config is based on the config from @ThePrimeagen
-
 ![screenshot](screenshot/image.png)
 
 ## Requirements
-- ripgrep
-- clang: lsp/formatter/linter for c/cpp
-- ruff: lsp/formatter/linter for py
-- tsserver: lsp for js/ts
+
+- git (for plugins)
+- nodejs (for lsp's)
+- ripgrep (for telescope)
 
 ## Plugins
 
 - **package-manager**: [lazy.nvim](https://github.com/folke/lazy.nvim)
-- **code-complition**: [copilot](https://github.com/github/copilot.vim)
+- **code-completion**: [copilot](https://github.com/github/copilot.vim)
 - **competitive-programming**: [competitest](https://github.com/xeluxee/competitest.nvim)
 - **syntax-highlighting**: [treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 - **git**: [vim-fugitive](https://github.com/tpope/vim-fugitive.vim)
@@ -24,7 +22,7 @@ This config is based on the config from @ThePrimeagen
     - **lsp-manager**: [mason](https://github.com/williamboman/mason.nvim')
     - **lsp-config**: [mason-lspconfig](https://github.com/williamboman/mason-lspconfig.nvim')
     - **lsp-config**: [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig')
-    - **ls-server**: [lsp-zero](https://github.com/VonHeikemen/lsp-zero.nvim)
+    - **lsp-server**: [lsp-zero](https://github.com/VonHeikemen/lsp-zero.nvim)
     - **cmp**: [cmp]
         - [cmp-nvim-lps](https://github.com/hrsh7th/cmp-nvim-lsp)
         - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
