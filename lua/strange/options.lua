@@ -1,8 +1,10 @@
 local options = {
     autoindent = true,
-    smartindent = true, -- make indenting smarter again	tabstop = 4,
+    smartindent = true, -- make indenting smarter again	
+    tabstop = 4,
     shiftwidth = 4,
-    expandtab = true,   -- convert tabs to spaces	showtabline = 0,
+    expandtab = true, -- convert tabs to spaces	
+    showtabline = 0,
     showmatch = true,
     breakindent = true, -- wrap lines with indent
 
@@ -18,15 +20,19 @@ local options = {
     ignorecase = true,
     smartcase = true,
 
-    termguicolors = true, -- set term gui colors (most terminals support this)	hidden = true,
-    signcolumn = "yes",   -- always show the sign column, otherwise it would shift the text each time	showmode = false,
+    termguicolors = true, -- set term gui colors (most terminals support this)	
+    hidden = true,
+    signcolumn = "yes",   -- always show the sign column, otherwise it would shift the text each time	
+    showmode = true,
     errorbells = false,
-    wrap = false,         -- display lines as one long line	cursorline = true, -- highlight the current line
+    wrap = false,        -- display lines as one long line	
+    cursorline = true,   -- highlight the current line
 
-    backup = false,       -- creates a backup file
-    writebackup = false,  -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited	swapfile = false,
+    backup = false,      -- creates a backup file
+    writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited	
+    swapfile = false,
     undodir = os.getenv("HOME") .. "/.vim/undodir",
-    undofile = true,      -- enable persistent undo
+    undofile = true, -- enable persistent undo
 
     colorcolumn = "80",
     updatetime = 20,   -- faster completion (4000ms default)

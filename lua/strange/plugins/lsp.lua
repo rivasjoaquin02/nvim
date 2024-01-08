@@ -223,6 +223,10 @@ return {
             })
 
             require("lspconfig").tailwindcss.setup({})
+
+            -- show inline diagnostic in Hover windows
+            vim.o.updatetime = 250
+            vim.cmd [[autocmd! CursorHold, CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
         end,
     },
     -- lsp server manager
