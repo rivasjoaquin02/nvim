@@ -1,0 +1,76 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+vim.g.loaded_netrw = 1       -- disable netrw
+vim.g.loaded_netrwPlugin = 1 --  disable netrw
+
+local options = {
+    number = true,      -- set numbered lines
+    relativenumber = true, -- set relative numbered lines
+
+    numberwidth = 4,    -- set number column width to 4
+    termguicolors = true, -- set term gui colors (most terminals support this)
+    cursorline = true,  -- highlight the current line
+
+    autoindent = true,
+    tabstop = 4,
+    shiftwidth = 4,                       -- the number of spaces inserted for each indentation
+    expandtab = true,                     -- convert tabs to spaces
+    showmatch = true,
+    breakindent = true,                   -- wrap lines with indent
+
+    incsearch = true,                     -- make search act like search in modern browsers
+    hlsearch = false,                     -- highlight all matches on previous search pattern
+    ignorecase = true,                    -- ignore case in search patterns
+
+    backup = false,                       -- creates a backup file
+    writebackup = false,                  -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
+    swapfile = false,                     -- creates a swapfile
+    undofile = true,                      -- enable persistent undo
+
+    clipboard = "unnamedplus",            -- allows neovim to access the system clipboard
+    cmdheight = 1,                        -- more space in the neovim command line for displaying messages
+    completeopt = { "menuone", "noselect" }, -- mostly just for cmp
+    conceallevel = 0,                     -- so that `` is visible in markdown files
+    --fileencoding = "utf-8",                  -- the encoding written to a file
+
+    mouse = "a", -- allow the mouse to be used in neovim
+    pumheight = 10, -- pop up menu height
+    showmode = true,
+
+    showtabline = 0, -- always show tabs
+    smartcase = true, -- smart case
+    smartindent = true, -- make indenting smarter again
+
+    -- SPLIT
+    splitbelow = true, -- force all horizontal splits to go below current window
+    splitright = true, -- force all vertical splits to go to the right of current window
+
+    -- time
+    timeoutlen = 1000, -- time to wait for a mapped sequence to complete (in milliseconds)
+    updatetime = 20, -- faster completion (4000ms default)
+
+    signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
+    wrap = false,    -- display lines as one long line
+    errorbells = false,
+    hidden = true,
+    showcmd = false, -- Don't show the command in the last line
+    ruler = false, -- Don't show the ruler
+
+    colorcolumn = "80",
+    scrolloff = 8,  -- Makes sure there are always eight lines of context
+    sidescrolloff = 8, -- Makes sure there are always eight lines of context
+
+    titlestring = "Neovim - %t",
+    --guifont = "MesloLGS NF:h18",
+    guicursor = "a:block",
+    guifont = "monospace:h17", -- the font used in graphical neovim applications
+    title = true,           -- set the title of window to the value of the titlestring
+    confirm = true,         -- confirm to save changes before exiting modified buffer
+
+    fillchars = { eob = " " }, -- change the character at the end of buffer
+}
+
+for k, v in pairs(options) do
+    vim.opt[k] = v
+end
