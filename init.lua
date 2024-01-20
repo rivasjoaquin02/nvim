@@ -3,3 +3,5 @@ require("config.options")
 require("config.icons")
 require("config.keymaps")
 require("config.lazy")
+
+

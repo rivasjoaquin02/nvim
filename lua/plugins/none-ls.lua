@@ -14,6 +14,7 @@ return {
             end,
             sources = {
                 null_ls.builtins.formatting.stylua,
+                null_ls.builtins.formatting.clang_format,
                 null_ls.builtins.formatting.prettier,
                 null_ls.builtins.formatting.black,
                 null_ls.builtins.diagnostics.eslint_d,
@@ -21,6 +22,10 @@ return {
                 null_ls.builtins.diagnostics.ruff,
                 --null_ls.builtins.completion.spell,
             },
+        })
+
+        null_ls.builtins.formatting.clang_format.with({
+            extra_args = { "-style=", '"{IndentWidth: 4}"' },
         })
     end,
 }

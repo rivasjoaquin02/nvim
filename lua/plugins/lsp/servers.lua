@@ -14,6 +14,8 @@ return {
             },
         },
     },
+    bashls = {},
+    sqlls = {},
     clangd = {
         cmd = {
             "clangd",
