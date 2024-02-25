@@ -54,7 +54,13 @@ map({ "n", "v" }, "<leader>y", [["+y]])
 map("n", "<leader>Y", [["+Y]])
 
 -- 😎: format the code
-map("n", "<leader>f", vim.lsp.buf.format)
+map("n", "<leader>f", function()
+    vim.lsp.buf.format({
+        filter = function(client)
+            return client.name ~= "tsserver"
+        end,
+    })
+end)
 
 -- quickfix navigation
 map("n", "<C-k>", "<cmd>cnext<CR>zz")

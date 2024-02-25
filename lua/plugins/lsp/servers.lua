@@ -1,4 +1,7 @@
 return {
+    bashls = {},
+    pyright = {},
+    tsserver = {},
     lua_ls = {
         Lua = {
             telemetry = { enable = false },
@@ -14,8 +17,6 @@ return {
             },
         },
     },
-    bashls = {},
-    sqlls = {},
     clangd = {
         cmd = {
             "clangd",
@@ -33,7 +34,6 @@ return {
             semanticHighlighting = true,
         },
     },
-    pyright = {},
     jsonls = {
         settings = {
             json = {

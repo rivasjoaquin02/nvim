@@ -12,6 +12,7 @@ local options = {
     termguicolors = true, -- set term gui colors (most terminals support this)
     cursorline = true,  -- highlight the current line
 
+    softtabstop = 4,
     autoindent = true,
     tabstop = 4,
     shiftwidth = 4,                       -- the number of spaces inserted for each indentation
