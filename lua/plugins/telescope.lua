@@ -193,6 +193,5 @@ return {
         require("telescope").load_extension("refactoring")
         require("telescope").load_extension("dap")
         require("telescope").load_extension("frecency")
-        require("telescope").load_extension("zoxide")
     end,
 }
