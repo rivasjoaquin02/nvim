@@ -1,15 +1,5 @@
--- debug.lua
---
--- Shows how to use the DAP plugin to debug your code.
---
--- Primarily focused on configuring the debugger for Go, but can
--- be extended to other languages as well. That's why it's called
--- kickstart.nvim and not kitchen-sink.nvim ;)
-
 return {
-  -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
-  -- NOTE: And you can specify dependencies as well
   dependencies = {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
@@ -22,13 +12,42 @@ return {
     'jay-babu/mason-nvim-dap.nvim',
 
     -- Add your own debuggers here
-    'leoluz/nvim-dap-go',
+    -- 'leoluz/nvim-dap-go',
   },
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
 
+    dap.adapters.codelldb = {
+      type = 'server',
+      port = '${port}',
+      executable = {
+        command = '/home/yjh/Programs/codelldb/extension/adapter/codelldb',
+        args = { '--port', '${port}' },
+        -- On windows you may have to uncomment this:
+        -- detached = false,
+      },
+    }
+
+    -- Then a link is to be made to the adapter through neovim.
+    dap.configurations.cpp = {
+      {
+        name = 'Launch file',
+        type = 'codelldb',
+        request = 'launch',
+        program = function()
+          return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+      },
+    }
+
+    -- Apply the cpp dap configs to rust
+    dap.configurations.rust = dap.configurations.cpp
+
     require('mason-nvim-dap').setup {
+      automatic_installation = true,
       -- Makes a best effort to setup the various debuggers with
       -- reasonable debug configurations
       automatic_setup = true,
@@ -57,22 +76,24 @@ return {
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
+    local icons = require 'config.icons'
     dapui.setup {
-      -- Set icons to characters that are more likely to work in every terminal.
-      --    Feel free to remove or use ones that you like more! :)
-      --    Don't feel like these are good choices.
-      icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
+      icons = {
+        expanded = icons.debug.expanded,
+        collapsed = icons.debug.collapsed,
+        current_frame = icons.debug.current_frame,
+      },
       controls = {
         icons = {
-          pause = '⏸',
-          play = '▶',
-          step_into = '⏎',
-          step_over = '⏭',
-          step_out = '⏮',
-          step_back = 'b',
-          run_last = '▶▶',
-          terminate = '⏹',
-          disconnect = '⏏',
+          pause = icons.debug.pause,
+          play = icons.debug.play,
+          step_into = icons.debug.step_into,
+          step_over = icons.debug.step_over,
+          step_out = icons.debug.step_out,
+          step_back = icons.debug.step_back,
+          run_last = icons.debug.run_last,
+          terminate = icons.debug.terminate,
+          disconnect = icons.debug.disconnect,
         },
       },
     }
@@ -85,6 +106,6 @@ return {
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
     -- Install golang specific config
-    require('dap-go').setup()
+    -- require('dap-go').setup()
   end,
 }
