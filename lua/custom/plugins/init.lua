@@ -10,10 +10,10 @@ return {
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
-  -- "gc" to comment visual regions/lines
+  -- "gc" & "gb" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
-  -- useful when there are embedded languages in certain types of files (e.g. Vue or React)
+  -- useful for embedded languages in certain types of files (e.g. Vue or React)
   { 'joosepalviste/nvim-ts-context-commentstring', lazy = true },
 
   -- Neovim plugin to improve the default vim.ui interfaces

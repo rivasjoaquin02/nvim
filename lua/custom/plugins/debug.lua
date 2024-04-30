@@ -1,5 +1,6 @@
 return {
   'mfussenegger/nvim-dap',
+  event = 'VeryLazy',
   dependencies = {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
@@ -18,33 +19,29 @@ return {
     local dap = require 'dap'
     local dapui = require 'dapui'
 
-    dap.adapters.codelldb = {
-      type = 'server',
-      port = '${port}',
-      executable = {
-        command = '/home/yjh/Programs/codelldb/extension/adapter/codelldb',
-        args = { '--port', '${port}' },
-        -- On windows you may have to uncomment this:
-        -- detached = false,
-      },
+    dap.adapters.lldb = {
+      type = 'executable',
+      command = '/usr/bin/lldb-vscode',
+      name = 'lldb',
     }
-
     -- Then a link is to be made to the adapter through neovim.
     dap.configurations.cpp = {
       {
-        name = 'Launch file',
-        type = 'codelldb',
+        name = 'Launch',
+        type = 'lldb',
         request = 'launch',
         program = function()
           return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
         end,
         cwd = '${workspaceFolder}',
-        stopOnEntry = false,
+        stopOnEntry = true,
+        externalTerminal = true,
+        args = {},
       },
     }
 
-    -- Apply the cpp dap configs to rust
-    dap.configurations.rust = dap.configurations.cpp
+    dap.configurations.c = dap.configurations.cpp
+    --dap.configurations.rust = dap.configurations.cpp
 
     require('mason-nvim-dap').setup {
       automatic_installation = true,
@@ -60,7 +57,6 @@ return {
       -- online, please don't ask me how to install them :)
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
-        'delve',
       },
     }
 
