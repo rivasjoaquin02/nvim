@@ -5,8 +5,16 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       local lint = require 'lint'
+
       lint.linters_by_ft = {
+        c = { 'clangtidy' },
+        cpp = { 'clangtidy' },
         markdown = { 'markdownlint' },
+        javascript = { 'eslint_d' },
+        typescript = { 'eslint_d' },
+        javascriptreact = { 'eslint_d' },
+        typescriptreact = { 'eslint_d' },
+        python = { 'mypy', 'ruff' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
