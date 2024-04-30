@@ -1,5 +1,6 @@
 return {
   'folke/trouble.nvim',
+  lazy = true,
   cmd = { 'TroubleToggle', 'Trouble' },
   opts = {
     -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
@@ -28,7 +29,6 @@ return {
     auto_jump = {},
     use_diagnostic_signs = true,
   },
-  lazy = true,
   keys = {
     { '<leader>x', ':Trouble<CR>', desc = 'Opens Trouble Windows' },
     { '<leader>xt', ':Trouble<CR>', desc = 'Opens Trouble Todo' },

@@ -1,5 +1,6 @@
 return { -- Useful plugin to show you pending keybinds.
   'folke/which-key.nvim',
+  lazy = true,
   event = 'VimEnter', -- Loads which-key before all the UI elements are loaded
   -- Events can be
   -- normal autocommands events (`:help autocmd-events`).

@@ -1,9 +1,10 @@
 return {
   'windwp/nvim-autopairs',
-  -- Optional dependency
+  lazy = true,
+  event = 'VeryLazy',
   dependencies = { 'hrsh7th/nvim-cmp' },
+  opts = {},
   config = function()
-    require('nvim-autopairs').setup {}
     -- If you want to automatically add `(` after selecting a function or method
     local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
     local cmp = require 'cmp'
