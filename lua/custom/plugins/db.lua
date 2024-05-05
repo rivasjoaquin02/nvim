@@ -1,6 +1,8 @@
 -- dadbod.vim: Modern database interface for Vim
 return {
   'kristijanhusak/vim-dadbod-ui',
+  enabled = false,
+  lazy = true,
   event = 'VeryLazy',
   dependencies = {
     { 'tpope/vim-dadbod', lazy = true },
@@ -11,9 +13,6 @@ return {
     'DBUIToggle',
     'DBUIAddConnection',
     'DBUIFindBuffer',
-  },
-  keys = {
-    { '<leader>db', '<Cmd>DBUIToggle<CR>', desc = '[D]e[B]ug' },
   },
   init = function()
     -- Your DBUI configuration

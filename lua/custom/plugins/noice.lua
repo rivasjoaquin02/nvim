@@ -1,7 +1,10 @@
 return {
   'folke/noice.nvim',
   event = 'VeryLazy',
-  dependencies = { 'MunifTanjim/nui.nvim', 'rcarriga/nvim-notify' },
+  dependencies = {
+    'MunifTanjim/nui.nvim',
+    -- 'rcarriga/nvim-notify'
+  },
   opts = {
     cmdline = {
       backend = 'popup',
@@ -41,7 +44,8 @@ return {
       inc_rename = false, -- enables an input dialog for inc-rename.nvim
       lsp_doc_border = true, -- add a border to hover docs and signature help
     },
-    messages = { enabled = false },
+    -- Messages shown by lsp servers
+    messages = { enabled = true },
     notify = { enabled = false },
   },
 }

@@ -1,7 +1,8 @@
 -- LSP Configuration & Plugins
 return {
   'neovim/nvim-lspconfig',
-  --event = { "BufReadPre", "BufNewFile" },
+  lazy = true,
+  event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
     -- Automatically install LSPs and related tools to stdpath for Neovim
     'williamboman/mason.nvim',
@@ -13,8 +14,17 @@ return {
 
     -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
     -- used for completion, annotations and signatures of Neovim apis
-    { 'folke/neodev.nvim', opts = {} },
+    { 'folke/neodev.nvim' },
   },
+  init = function()
+    require('neodev').setup {
+      library = {
+        enabled = true,
+        plugins = { 'nvim-dap-ui', 'nvim-treesitter', 'telescope.nvim' },
+        types = true,
+      },
+    }
+  end,
   config = function()
     -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
     -- and elegantly composed help section, `:help lsp-vs-treesitter`
@@ -158,6 +168,7 @@ return {
     -- for you, so that they are available from within Neovim.
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
+      'luacheck',
       'stylua', -- Used to format Lua code
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }

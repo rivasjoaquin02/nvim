@@ -1,6 +1,7 @@
 -- Autocompletion
 return {
   'hrsh7th/nvim-cmp',
+  lazy = true,
   event = 'InsertEnter',
   dependencies = {
     -- Snippet Engine & its associated nvim-cmp source
@@ -34,6 +35,7 @@ return {
     --  into multiple repos for maintenance purposes.
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
+    'hrsh7th/cmp-cmdline',
   },
   config = function()
     -- See `:help cmp`
@@ -42,6 +44,33 @@ return {
     local icons = require 'config.icons'
 
     luasnip.config.setup {}
+
+    -- nvim-autopairs
+    local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+    cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+
+    -- `/` cmdline setup.
+    cmp.setup.cmdline('/', {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = {
+        { name = 'buffer' },
+      },
+    })
+
+    -- `:` cmdline setup.
+    cmp.setup.cmdline(':', {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = cmp.config.sources({
+        { name = 'path' },
+      }, {
+        {
+          name = 'cmdline',
+          option = {
+            ignore_cmds = { 'Man', '!' },
+          },
+        },
+      }),
+    })
 
     cmp.setup {
       snippet = {

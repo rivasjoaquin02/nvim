@@ -5,19 +5,16 @@ return {
   { import = 'custom.plugins' },
 
   -- Use treesitter to auto close and auto rename html tag
-  { 'windwp/nvim-ts-autotag', event = 'InsertEnter', opts = {} },
+  { 'windwp/nvim-ts-autotag', event = 'InsertEnter' },
 
   -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
+  { 'tpope/vim-sleuth' },
 
   -- "gc" & "gb" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
   -- useful for embedded languages in certain types of files (e.g. Vue or React)
   { 'joosepalviste/nvim-ts-context-commentstring', lazy = true },
-
-  -- Neovim plugin to improve the default vim.ui interfaces
-  { 'stevearc/dressing.nvim', dependencies = { 'MunifTanjim/nui.nvim' }, opts = {} },
 
   -- Smooth scrolling neovim plugin written in lua
   {
@@ -31,12 +28,23 @@ return {
   },
 
   -- Add/change/delete surrounding delimiter pairs with ease
-  { 'kylechui/nvim-surround', version = '*', event = 'VeryLazy', opts = {} },
+  { 'kylechui/nvim-surround', event = 'VeryLazy', opts = {} },
+  --[[ Old text                    Command         New text
+--------------------------------------------------------------------------------
+    surr*ound_words             ysiw)           (surround_words)
+    *make strings               ys$"            "make strings"
+    [delete ar*ound me!]        ds]             delete around me!
+    remove <b>HTML t*ags</b>    dst             remove HTML tags
+    'change quot*es'            cs'"            "change quotes"
+    <b>or tag* types</b>        csth1<CR>       <h1>or tag types</h1>
+    delete(functi*on calls)     dsf             function calls
+]]
 
   -- Highlight todo, notes, etc in comments
   {
     'folke/todo-comments.nvim',
-    event = 'VimEnter',
+    lazy = true,
+    event = 'VeryLazy',
     -- event = { "BufReadPost", "BufNewFile" },
     dependencies = 'nvim-lua/plenary.nvim',
     opts = {

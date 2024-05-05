@@ -35,7 +35,9 @@ External Requirements:
 - Language Setup:
   - If want to write Typescript, you need `npm`
   - If want to write Golang, you will need `go`
+- If want to write Python, you will need `python-neovim`
   - etc.
+
 
 > **NOTE**
 > See [Install Recipes](#Install-Recipes) for additional Windows and Linux specific notes

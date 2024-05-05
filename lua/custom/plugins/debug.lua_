@@ -1,9 +1,10 @@
+-- Creates a beautiful debugger UI
 return {
   'mfussenegger/nvim-dap',
+  lazy = true,
   event = 'VeryLazy',
   dependencies = {
-    -- Creates a beautiful debugger UI
-    'rcarriga/nvim-dap-ui',
+    { 'rcarriga/nvim-dap-ui', lazy = true },
 
     -- Required dependency for nvim-dap-ui
     'nvim-neotest/nvim-nio',
@@ -14,7 +15,11 @@ return {
 
     -- Add your own debuggers here
     -- 'leoluz/nvim-dap-go',
+
+    -- This plugin adds virtual text support to nvim-dap. nvim-treesitter is used to find variable definitions.
+    'theHamsta/nvim-dap-virtual-text',
   },
+  opts = {},
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
@@ -24,6 +29,13 @@ return {
       command = '/usr/bin/lldb-vscode',
       name = 'lldb',
     }
+
+    dap.adapters.python = {
+      type = 'executable',
+      command = os.getenv 'HOME' .. '/.virtualenvs/tools/bin/python',
+      args = { '-m', 'debugpy.adapter' },
+    }
+
     -- Then a link is to be made to the adapter through neovim.
     dap.configurations.cpp = {
       {
@@ -42,6 +54,18 @@ return {
 
     dap.configurations.c = dap.configurations.cpp
     --dap.configurations.rust = dap.configurations.cpp
+
+    dap.configurations.python = {
+      {
+        type = 'python',
+        request = 'launch',
+        name = 'Launch file',
+        program = '${file}',
+        pythonPath = function()
+          return '/usr/bin/python'
+        end,
+      },
+    }
 
     require('mason-nvim-dap').setup {
       automatic_installation = true,
@@ -69,6 +93,8 @@ return {
     vim.keymap.set('n', '<leader>B', function()
       dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
     end, { desc = 'Debug: Set Breakpoint' })
+    -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
+    vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
@@ -93,9 +119,6 @@ return {
         },
       },
     }
-
-    -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-    vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close

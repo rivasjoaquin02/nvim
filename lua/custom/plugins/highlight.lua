@@ -4,7 +4,10 @@ return {
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
   opts = {
+    -- Automatically install missing parsers when entering buffer
+    -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
     auto_install = true,
+    -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = false,
     ensure_installed = {
       'bash',
@@ -22,6 +25,8 @@ return {
       'yaml',
       'vim',
       'vimdoc',
+      'regex',
+      'dockerfile',
     },
     highlight = {
       enable = true,
@@ -31,9 +36,7 @@ return {
       additional_vim_regex_highlighting = { 'ruby', 'latex' },
     },
     indent = { enable = true, disable = { 'ruby' } },
-    autotag = {
-      enable = true,
-    },
+    autotag = { enable = true },
   },
   config = function(_, opts)
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`

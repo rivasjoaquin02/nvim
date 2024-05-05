@@ -1,6 +1,5 @@
 return {
   'nvim-neo-tree/neo-tree.nvim',
-  branch = 'v3.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons',
@@ -16,7 +15,6 @@ return {
     vim.fn.sign_define('DiagnosticSignWarn', { text = ' ', texthl = 'DiagnosticSignWarn' })
     vim.fn.sign_define('DiagnosticSignInfo', { text = ' ', texthl = 'DiagnosticSignInfo' })
     vim.fn.sign_define('DiagnosticSignHint', { text = '󰌵', texthl = 'DiagnosticSignHint' })
-    vim.cmd [[nnoremap \ :Neotree reveal<cr>]]
   end,
   opts = {
     close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
@@ -210,7 +208,7 @@ return {
           ['<bs>'] = 'navigate_up',
           ['.'] = 'set_root',
           ['H'] = 'toggle_hidden',
-          ['/'] = 'fuzzy_finder',
+          -- ['/'] = 'fuzzy_finder',
           ['D'] = 'fuzzy_finder_directory',
           ['#'] = 'fuzzy_sorter', -- fuzzy sorting using the fzy algorithm
           -- ["D"] = "fuzzy_sorter_directory",

@@ -3,7 +3,11 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.scriptencoding = 'utf-8'
+
 vim.g.have_nerd_font = true
+
+vim.opt.wildignore:append { '*/node_modules/*' }
 
 -- [[ Setting options ]]
 -- See `:help vim.opt` or `:help option-list`
@@ -15,8 +19,10 @@ local options = {
   termguicolors = true, -- set term gui colors (most terminals support this)
   cursorline = true, -- highlight the current line
 
+  encoding = 'utf-8',
+  fileencoding = 'utf-8',
+
   softtabstop = 4,
-  autoindent = true,
   tabstop = 4,
   shiftwidth = 4, -- the number of spaces inserted for each indentation
   expandtab = true, -- convert tabs to spaces
@@ -34,7 +40,7 @@ local options = {
   swapfile = false, -- creates a swapfile
   undofile = true, -- save undo history
 
-  clipboard = 'unnamedplus', -- allows neovim to access the system clipboard
+  -- clipboard = 'unnamedplus', -- allows neovim to access the system clipboard
   --cmdheight = 1, -- more space in the neovim command line for displaying messages
   completeopt = { 'menuone', 'noselect' }, -- mostly just for cmp
   conceallevel = 0, -- so that `` is visible in markdown files
@@ -45,6 +51,7 @@ local options = {
   showmode = false, -- Don't show the mode, since it's already in the status line
 
   showtabline = 0, -- always show tabs
+  autoindent = true,
   smartcase = true, -- smart case
   smartindent = true, -- make indenting smarter again
 
