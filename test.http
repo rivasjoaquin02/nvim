@@ -1,0 +1,15 @@
+### The first request
+
+POST {{base_url}}/api/v1/users HTTP/1.1
+Authorization: Bearer {{jwt_token}}
+
+{
+  "name": "Alice"
+}
+
+### The second request
+
+GET {{base_url}}/api/v1/users?name=Alice HTTP/1.1
+Authorization: Bearer {{jwt_token}}
+
+### ...more requests
