@@ -7,10 +7,10 @@ vim.keymap.set('n', '\\', '<cmd>split<CR>', { nowait = true, noremap = true })
 vim.keymap.set('n', '|', '<cmd>vsplit<CR>')
 
 -- splits resizing
-vim.keymap.set('n', '+', ':vertical resize +5<CR>')
-vim.keymap.set('n', '_', ':vertical resize -5<CR>')
-vim.keymap.set('n', '=', ':resize +5<CR>')
-vim.keymap.set('n', '-', ':resize -5<CR>')
+vim.keymap.set('n', '<C-Up>', ':resize +5<CR>')
+vim.keymap.set('n', '<C-Down>', ':resize -5<CR>')
+vim.keymap.set('n', '<C-Left>', ':vertical resize +5<CR>')
+vim.keymap.set('n', '<C-Right>', ':vertical resize -5<CR>')
 
 -- this is for move a selected line up and down (like alt in vscode)
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
