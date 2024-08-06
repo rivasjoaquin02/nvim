@@ -16,9 +16,7 @@ return {
             -- You can configure highlights by doing something like:
             vim.cmd.hi 'Comment gui=none'
         end,
-        dependencies = {
-            'tjdevries/colorbuddy.nvim',
-        },
+        dependencies = { 'tjdevries/colorbuddy.nvim' },
         opts = {
             comment_italics = true,
             transparent_background = true,

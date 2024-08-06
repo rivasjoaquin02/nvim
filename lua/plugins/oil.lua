@@ -1,12 +1,13 @@
+-- File Manager
 return {
-    'stevearc/oil.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function()
-        require('oil').setup {
-            columns = { 'icon' },
-            view_options = { show_hidden = true },
-        }
-        vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
-        vim.keymap.set('n', '<leader>-', require('oil').toggle_float, { desc = 'Open parent directory' })
-    end,
+    "stevearc/oil.nvim",
+    event = "VimEnter",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+        columns = { "icon" },
+        view_options = { show_hidden = true },
+    },
+    keys = {
+        { "-", "<CMD>Oil<CR>", desc = "Open parent dir" },
+    },
 }
